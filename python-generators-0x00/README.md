@@ -2,7 +2,7 @@
 
 ## Seed Database
 
-This project sets up a MySQL database (`ALX_prodev`) and a table (`user_data`) for streaming user data using Python generators.
+This project demonstrates how to set up a MySQL database, populate it with sample data, and stream rows using Python generators.
 
 ### Overview
 
@@ -47,3 +47,23 @@ The `user_data` table is now ready for your Python generators.
 - The script uses the MySQL user `alx_user` with password `leetcode`.
 - You can change these in `seed.py` if you prefer a different user/password.
 - No CSV file is required; sample data is hardcoded into the script.
+
+## Stream Rows from an SQL Database
+
+### Overview
+The `0-stream_users.py` script:
+- Defines a generator function `stream_users()` that fetches rows from the `user_data` table **one by one**.
+- Converts `age` from Decimal to integer.
+- Can be used in other scripts to iterate over rows lazily without loading all data at once.
+
+### Test the generator directly:
+```bash
+python3 0-stream_users.py
+```
+
+You should see: Output (first 6 rows):
+```python
+{'user_id': '...', 'name': 'Dan Altenwerth Jr.', 'email': 'Molly59@gmail.com', 'age': 67}
+{'user_id': '...', 'name': 'Glenda Wisozk', 'email': 'Miriam21@gmail.com', 'age': 119}
+...
+```
