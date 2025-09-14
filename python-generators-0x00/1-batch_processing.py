@@ -5,7 +5,7 @@
 import mysql.connector
 
 DB_NAME = "ALX_prodev"
-TABLE_NAME = "user_data"
+
 
 def stream_users_in_batches(batch_size):
 # Generator that streams rows from user_data table in batches of batch_size.
@@ -17,7 +17,7 @@ def stream_users_in_batches(batch_size):
             database=DB_NAME
         )
         cursor = connection.cursor(dictionary=True)
-        cursor.execute(f"SELECT * FROM {TABLE_NAME}")
+        cursor.execute(f"SELECT * FROM user_data")
 
         temp_batch = []     #temporary list to store the rows until we reach the size
         for row in cursor:
