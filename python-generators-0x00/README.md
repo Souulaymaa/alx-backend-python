@@ -67,3 +67,23 @@ You should see: Output (first 6 rows):
 {'user_id': '...', 'name': 'Glenda Wisozk', 'email': 'Miriam21@gmail.com', 'age': 119}
 ...
 ```
+
+## Batch Processing
+
+### Overview
+The `1-batch_processing.py` script (has):
+- Generator function `stream_users_in_batches(batch_size)` that fetches rows **in batches** from the database.  
+- Generator function `batch_processing(batch_size)` that **filters users over 25** from each batch.  
+- Explicitly unpacks dictionary fields to avoid editor/type warnings.
+
+### Test the batch processing
+```bash
+python3 0-batch_users.py
+```
+
+You should see: Output (first 6 users over age 25):
+```python
+{'user_id': '...', 'name': 'Dan Altenwerth Jr.', 'email': 'Molly59@gmail.com', 'age': 67}
+{'user_id': '...', 'name': 'Glenda Wisozk', 'email': 'Miriam21@gmail.com', 'age': 119}
+...
+```

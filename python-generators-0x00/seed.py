@@ -58,7 +58,7 @@ def create_table(connection):
         CREATE TABLE IF NOT EXISTS {TABLE_NAME} (
             user_id CHAR(36) PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
-            email VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL UNIQUE,
             age DECIMAL NOT NULL,
             INDEX (user_id)
         );
