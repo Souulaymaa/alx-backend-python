@@ -13,7 +13,7 @@ def with_db_connection(func):
 
 def transactional(func):
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(conn, *args, **kwargs):
         try:
             result = func(conn, *args, **kwargs)
             conn.commit()  # comit if no error
