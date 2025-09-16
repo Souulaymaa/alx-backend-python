@@ -17,7 +17,7 @@ class DatabaseConnection:
             self.connection.close()
 
 if __name__ == "__main__":
-        with DatabaseConnection('user.db') as connection:
+        with DatabaseConnection('users.db') as connection:
             cursor = connection.cursor()
             cursor.execute("SELECT * FROM users;")
             # fetchall() returns a list of tuples, where each tuple represents a row from the table.
