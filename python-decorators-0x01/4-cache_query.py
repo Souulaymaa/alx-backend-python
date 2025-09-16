@@ -20,7 +20,7 @@ def cache_query(func):
     @functools.wraps(func)
     def wrapper(conn, *args, **kwargs):
         # Extract query string
-        query = kwargs.get("query") if "query" in kwargs else (args[0] if args else None)
+        query = kwargs.get("query") if "query" in kwargs else (args[1] if args else None) # args[0] is already conn
         # If query result is cached, return it
         if query in query_cache:
             print(f"Using cached result for query: {query}")
