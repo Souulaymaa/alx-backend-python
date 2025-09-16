@@ -6,7 +6,7 @@ plus context managers for automatically closing connections and cursors
 import aiosqlite
 import asyncio
 
-async def asyncfetchusers():
+async def async_fetch_users():
     #fetch all users
     async with aiosqlite.connect('users.db') as db:
         async with db.execute('SELECT * FROM users') as cursor:
@@ -16,7 +16,7 @@ async def asyncfetchusers():
                 print(row)
             return rows
 
-async def asyncfetcholder_users(parameter):
+async def async_fetch_older_users():
     #fetch all users older than 40 yo
     async with aiosqlite.connect('users.db') as db:
         async with db.execute('SELECT * FROM users WHERE age > 40') as cursor:
@@ -29,8 +29,8 @@ async def asyncfetcholder_users(parameter):
 async def fetch_concurrently():
     #execute both queries concurrently
     await asyncio.gather(
-        asyncfetchusers(),
-        asyncfetcholder_users(40),
+        async_fetch_users(),
+        async_fetch_older_users(),
     )
 
 if __name__ == "__main__":
