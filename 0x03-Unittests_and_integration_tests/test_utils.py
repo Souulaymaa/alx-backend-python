@@ -34,7 +34,7 @@ class TestGetJson(unittest.TestCase):
     ])
 
     #using patch as a decorator
-    @patch("path.to.object")
+    @patch("utils.requests.get")
     def test_get_json(self, url, mock_obj, payload):
         mock_response = Mock()
         mock_response.json.return_value = payload
