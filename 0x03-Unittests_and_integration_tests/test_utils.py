@@ -26,6 +26,8 @@ class TestAccessNestedMap(unittest.TestCase):
         with self.assertRaises(exception):
             access_nested_map(nested_map, path)
 
+
+
 class TestGetJson(unittest.TestCase):
 
     @parameterized.expand([
@@ -33,18 +35,17 @@ class TestGetJson(unittest.TestCase):
         ("http://holberton.io", {"payload": False})
     ])
 
-    #using patch as a decorator
-    @patch("utils.requests.get")
-    def test_get_json(self, url, mock_obj, payload):
-        mock_response = Mock()
-        mock_response.json.return_value = payload
-        mock_obj.return_value = mock_response
+    def test_get_json(self, url, payload):
+        with patch("utils.requests.get") as mock_obj:
+            mock_response = Mock()
+            mock_response.json.return_value = payload
+            mock_obj.return_value = mock_response
 
-        # call the function
-        result = get_json(url)
+            # call the function
+            result = get_json(url)
 
-        # Assert if output matches expected payload
-        self.assertEqual(result, payload)
+            # Assert if output matches expected payload
+            self.assertEqual(result, payload)
 
-        # requests.get was called exactly once with the URL
-        mock_obj.assert_called_once_with(url)
+            # requests.get was called exactly once with the URL
+            mock_obj.assert_called_once_with(url)
