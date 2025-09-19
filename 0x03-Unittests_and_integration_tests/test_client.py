@@ -21,11 +21,11 @@ class TestGithubOrgClient(unittest.TestCase):
         ('abc',)
     ])
     @patch("client.get_json")
-    def test_org(self, orgname, mock_getjson:Mock):
+    def test_org(self, orgname, mock_getjson: Mock):
         '''
         Test that GithubOrgClient.org returns the correct value
         '''
-        expected = {'login' : orgname}
+        expected = {'login': orgname}
         mock_getjson.return_value = expected
         client = GithubOrgClient(orgname)
         result = client.org
@@ -34,18 +34,22 @@ class TestGithubOrgClient(unittest.TestCase):
             f"https://api.github.com/orgs/{orgname}"
         )
 
-
     def test_public_repos_url(self):
         '''
         Test if _public_repos_url returns expected URL
         '''
         with patch('client.GithubOrgClient.org', new_callable=PropertyMock) as mock_org:
-            mock_org.return_value = {"repos_url": "https://api.github.com/orgs/example/repos"}
+            mock_org.return_value = {
+                "repos_url":
+                    "https://api.github.com/orgs/example/repos"
+            }
             client = GithubOrgClient('example')
-            self.assertEqual(client._public_repos_url, "https://api.github.com/orgs/example/repos")
+            expected_url = "https://api.github.com/orgs/example/repos"
+            self.assertEqual(client._public_repos_url, expected_url)
+
 
     @patch('client.get_json')
-    def test_public_repos(self, mock_getjson:Mock):
+    def test_public_repos(self, mock_getjson: Mock):
         '''
         Test that GithubOrgClient.public_repos returns the expected list of repos
         '''
@@ -57,7 +61,9 @@ class TestGithubOrgClient(unittest.TestCase):
         ]
         mock_getjson.return_value = test_payload
 
-        with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock) as mock_public_repos_url:
+        with patch(
+            'client.GithubOrgClient._public_repos_url', new_callable=PropertyMock
+            ) as mock_public_repos_url:
             mock_public_repos_url.return_value = "https://example-url.com"
             client = GithubOrgClient('example')
             result = client.public_repos()
