@@ -63,5 +63,6 @@ class TestGithubOrgClient(unittest.TestCase):
             result = client.public_repos()
             expected = ["repo1", "repo2", "repo3"]
             self.assertEqual(result, expected)
-
-            
+            # testing if only called once
+            mock_getjson.assert_called_once_with("https://example-url.com")
+            mock_public_repos_url.assert_called_once()
