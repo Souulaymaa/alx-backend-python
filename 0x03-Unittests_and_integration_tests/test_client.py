@@ -101,7 +101,7 @@ class MockResponse:
         '''Return JSON payload'''
         return self._json_data
     
-    
+
 @parameterized_class([
      {
         "org_payload": TEST_PAYLOAD[0][0],
@@ -119,7 +119,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         mock_get = cls.get_patcher.start()
 
         def side_effect(url):
-            if url == GithubOrgClient.ORG_URL.format(org=cls.org_payload["login"]):
+            if url == GithubOrgClient.ORG_URL.format('google'):
                 return MockResponse(cls.org_payload)
             if url == cls.org_payload["repos_url"]:
                 return MockResponse(cls.repos_payload)
@@ -134,12 +134,12 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos(self):
         '''Test if public_repos returns expected repos'''
-        client = GithubOrgClient(self.org_payload["login"])
+        client = GithubOrgClient('google')
         self.assertEqual(client.public_repos(), self.expected_repos)
 
     def test_public_repos_with_license(self):
         '''Test public_repos filters repos by license'''
-        client = GithubOrgClient(self.org_payload["login"])
+        client = GithubOrgClient('google')
         self.assertEqual(client.public_repos(license="apache-2.0"), self.apache2_repos)
 
 
