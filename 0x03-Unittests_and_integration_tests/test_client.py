@@ -91,6 +91,17 @@ class TestGithubOrgClient(unittest.TestCase):
         self.assertEqual(result, expected)
 
 
+class MockResponse:
+    '''Mocked response object for requests.get'''
+
+    def __init__(self, json_data):
+        self._json_data = json_data
+
+    def json(self):
+        '''Return JSON payload'''
+        return self._json_data
+    
+    
 @parameterized_class([
      {
         "org_payload": TEST_PAYLOAD[0][0],
@@ -132,13 +143,5 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         self.assertEqual(client.public_repos(license="apache-2.0"), self.apache2_repos)
 
 
-class MockResponse:
-    '''Mocked response object for requests.get'''
 
-    def __init__(self, json_data):
-        self._json_data = json_data
-
-    def json(self):
-        '''Return JSON payload'''
-        return self._json_data
             
