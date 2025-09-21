@@ -100,7 +100,7 @@ class MockResponse:
     def json(self):
         '''Return JSON payload'''
         return self._json_data
-    
+
 
 @parameterized_class([
     {
