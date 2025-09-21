@@ -62,6 +62,9 @@ REST_FRAMEWORK = {
     ],
 }
 
+# Use custom User model
+AUTH_USER_MODEL = 'chats.User'
+
 
 ROOT_URLCONF = 'messaging_app.urls'
 
