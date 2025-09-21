@@ -119,9 +119,9 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock_get = cls.get_patcher.start()
 
         def side_effect(url):
-            if url == GithubOrgClient.ORG_URL.format('google'):
+            if url.endswith("/orgs/google"):
                 return MockResponse(cls.org_payload)
-            if url == cls.org_payload["repos_url"]:
+            elif url.endswith("/repos"):
                 return MockResponse(cls.repos_payload)
             return None
         
