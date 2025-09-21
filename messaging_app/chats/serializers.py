@@ -20,6 +20,16 @@ class UserSerializer(serializers.ModelSerializer):
             user.set_password(password)
             user.save()
         return user
+    
+    def validate_password(self, value):
+        if len(value) < 8:
+            raise serializers.ValidationError("Password must be at least 8 characters long")
+        return value
+
+    def validate(self, data):
+        if data['first_name'].lower() == data['last_name'].lower():
+            raise serializers.ValidationError("First name and last name cannot be identical")
+        return data
 
 # ------------------------
 # Message Serializer
@@ -30,6 +40,11 @@ class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
         fields = ['message_id', 'sender', 'sender_name', 'message_body', 'sent_at']
+
+    def validate_message_body(self, value):
+        if not value.strip():
+            raise serializers.ValidationError("Message body cannot be empty")
+        return value
 
 # ------------------------
 # Conversation Serializer
