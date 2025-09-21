@@ -103,7 +103,7 @@ class MockResponse:
     
 
 @parameterized_class([
-     {
+    {
         "org_payload": TEST_PAYLOAD[0][0],
         "repos_payload": TEST_PAYLOAD[0][1],
         "expected_repos": TEST_PAYLOAD[0][2],
@@ -124,7 +124,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
             elif url.endswith("/repos"):
                 return MockResponse(cls.repos_payload)
             return None
-        
+
         cls.mock_get.side_effect = side_effect
 
     @classmethod
@@ -140,8 +140,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     def test_public_repos_with_license(self):
         '''Test public_repos filters repos by license'''
         client = GithubOrgClient('google')
-        self.assertEqual(client.public_repos(license="apache-2.0"), self.apache2_repos)
-
-
-
-            
+        self.assertEqual(
+            client.public_repos(license="apache-2.0"), self.apache2_repos
+        )
