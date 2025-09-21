@@ -128,7 +128,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     def test_public_repos_with_license(self):
         '''Test public_repos filters repos by license'''
-        client = GithubOrgClient('google')
+        client = GithubOrgClient(self.org_payload["login"])
         self.assertEqual(client.public_repos(license="apache-2.0"), self.apache2_repos)
 
 
